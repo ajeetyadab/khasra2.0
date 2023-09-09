@@ -6,6 +6,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException,NoAlertPresentException,UnexpectedAlertPresentException,NoSuchElementException
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.action_chains import ActionChains
 import time
 import openpyxl
 
@@ -32,9 +34,15 @@ start_gata=sheet2.cell(2,5).value
 
 
 
-driver_path = "./chromedriver.exe"
-driver = webdriver.Chrome(driver_path)
+
+
+
+serv_obj=Service("chromedriver.exe")
+driver=webdriver.Chrome(service=serv_obj)
+actions=ActionChains(driver)
 mywait=WebDriverWait(driver,10)
+
+
 
 row_count=sheet1.max_row
 col_count=sheet1.max_column
@@ -99,9 +107,10 @@ number_x_path_map = {
 
 def load_first_page():
     driver.get("http://164.100.59.148/")
-    time.sleep(2)
-    #driver.find_element(By.XPATH,"/html/body/center/main/div/div/ul/li[4]/a/div/div[1]").click()
-    driver.find_element(By.XPATH,"/html/body/center/main/div/div/ul/li[5]/a/div").click()
+    time.sleep(1)
+    driver.find_element(By.XPATH,"//*[@id=\"about_us\"]/div/div[2]/a").click()
+    time.sleep(1)
+    driver.find_element(By.XPATH,"/html/body/center/main/div/div/ul/li[5]/a/div/div[1]").click()
     time.sleep(1)
 
 
@@ -122,10 +131,10 @@ def load_second_page():
     selecthalka = Select(driver.find_element(By.ID, "up_halka"))
     time.sleep(.5)
     selecthalka.select_by_visible_text(halka_name)
-    captcha_value = driver.find_element(By.ID, "CaptchaDiv").text
-    driver.find_element(By.ID, "CaptchaInput").send_keys(captcha_value)
+    #captcha_value = driver.find_element(By.ID, "CaptchaDiv").text
+    #driver.find_element(By.ID, "CaptchaInput").send_keys(captcha_value)
     driver.find_element(By.ID, "password").send_keys(pass_word)
-    time.sleep(1)
+    time.sleep(10)
     driver.find_element(By.CLASS_NAME, "login100-form-btn").click()
 
 
