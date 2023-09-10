@@ -134,7 +134,7 @@ def load_second_page():
     #captcha_value = driver.find_element(By.ID, "CaptchaDiv").text
     #driver.find_element(By.ID, "CaptchaInput").send_keys(captcha_value)
     driver.find_element(By.ID, "password").send_keys(pass_word)
-    time.sleep(10)
+    time.sleep(15)
     driver.find_element(By.CLASS_NAME, "login100-form-btn").click()
 
 
@@ -187,7 +187,7 @@ def search_number(number):
 
 def fill_khasra_pravisti(i):
     print(i)
-    search_number(iterable_gata[i-1])
+    search_number(str(iterable_gata[i-1]))
     print(iterable_gata[i-1])
     #mywait.until(expected_conditions.presence_of_element_located(By.ID,f"{iterable_id[i-1]}"))
     try :
