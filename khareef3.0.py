@@ -110,10 +110,10 @@ def load_first_page():
     time.sleep(1)
     driver.find_element(By.XPATH,"//*[@id=\"about_us\"]/div/div[2]/a").click()
     time.sleep(1)
-    driver.find_element(By.XPATH,"/html/body/center/main/div/div/ul/li[3]/a/div/div[1]").click()
+    driver.find_element(By.XPATH,"/html/body/center/main/div/div/ul/li[3]/a/div/div[1]").click() # 9- 5 pm link
     
     time.sleep(1)
-    #driver.find_element(By.XPATH,"/html/body/center/main/div/div/ul/li[5]/a/div/div[1]").click()
+    #driver.find_element(By.XPATH,"/html/body/center/main/div/div/ul/li[5]/a/div/div[1]").click() # after 5 pm link
     time.sleep(1)
 
 
