@@ -13,7 +13,7 @@ import openpyxl
 
 
 PASSWORD = "Anoop@123"
-VILLAGE = "0113600723036/ हरदासपुर कोठरा/हरनगला/116374"
+VILLAGE = "0113600723036/ हरदासपुर कोठरा/पैगम्वर पुर/116370"
 
 serv_obj=Service("chromedriver.exe")
 driver=webdriver.Chrome(service=serv_obj)
