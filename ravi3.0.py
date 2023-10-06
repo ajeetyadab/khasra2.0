@@ -18,7 +18,7 @@ file1="C:/Users/acer/Desktop/hrd.xlsx"
 file2="C:/Users/acer/Desktop/data.xlsx"
 workbook1=openpyxl.load_workbook(file1)
 workbook2=openpyxl.load_workbook(file2)
-sheet1=workbook1["khareef"]
+sheet1=workbook1["analysis_copy"]
 sheet2=workbook2["credentials"]
 
 
@@ -31,7 +31,7 @@ total_gata=sheet2.cell(2,4).value
 start_gata=sheet2.cell(2,5).value
 
 
-
+ttime = time.localtime()
 
 
 
@@ -60,7 +60,7 @@ iterable_area=[]
 for i in range(1,row_count+1):
     iterable_gata.append(sheet1.cell(i+1,2).value)
     iterable_id.append(sheet1.cell(i+1,7).value)
-    iterable_fasal.append(sheet1.cell(i+1,8).value)
+    iterable_fasal.append(sheet1.cell(i+1,11).value)
     iterable_boring.append(sheet1.cell(i+1,9).value)
     iterable_sinchit_asinchit.append(sheet1.cell(i+1,10).value)
     iterable_area.append(sheet1.cell(i+1,4).value)
@@ -109,11 +109,15 @@ def load_first_page():
     driver.get("http://164.100.59.148/")
     time.sleep(1)
     driver.find_element(By.XPATH,"//*[@id=\"about_us\"]/div/div[2]/a").click()
-    time.sleep(1)
-    #driver.find_element(By.XPATH,"/html/body/center/main/div/div/ul/li[3]/a/div/div[1]").click() # 9- 5 pm link
+    time.sleep(2)
+    if ttime.tm_hour >=9:
+        driver.find_element(By.XPATH,"/html/body/center/main/div/div/ul/li[3]/a/div/div[1]").click() # 8- 5 pm link
+        
+		
+    else:
+        driver.find_element(By.XPATH,"/html/body/center/main/div/div/ul/li[5]/a/div/div[1]").click() # after 8 pm link
+        
     
-    time.sleep(1)
-    driver.find_element(By.XPATH,"/html/body/center/main/div/div/ul/li[5]/a/div/div[1]").click() # after 5 pm link
     time.sleep(1)
 
 
@@ -146,10 +150,14 @@ def load_third_page():
     time.sleep(3)
     Select(driver.find_element(By.ID,"gram_name")).select_by_visible_text(gram_name)
     time.sleep(1)
+    
     Select(driver.find_element(By.ID,"fasalYear")).select_by_visible_text("1430 (1 जुलाई 2022 से 30 जून 2023)")
-    #Select(driver.find_element(By.ID,"fasalYear")).select_by_visible_text("1428 (1 जुलाई 2020 से 30 जून 2021)")
+    
+    
     time.sleep(3)
-    Select(driver.find_element(By.ID,"fasal")).select_by_visible_text("खरीफ की फसल (10 अगस्त से 30 सितम्बर)")
+    #Select(driver.find_element(By.ID,"fasal")).select_by_visible_text("खरीफ की फसल (10 अगस्त से 30 सितम्बर)") # FOR KHAREEF
+    Select(driver.find_element(By.ID,"fasal")).select_by_visible_text("रबी की फसल (1 जनवरी से 28 फरवरी)") # FOR RABI
+    
     time.sleep(1)
     alert_window_0 = driver.switch_to.alert
     print(alert_window_0.text)
@@ -194,17 +202,22 @@ def fill_khasra_pravisti(i):
     print(iterable_gata[i-1])
     #mywait.until(expected_conditions.presence_of_element_located(By.ID,f"{iterable_id[i-1]}"))
     try :
+    
+        time.sleep(1)
         driver.find_element(By.ID,f"{iterable_id[i-1]}").click()
         print(iterable_id[i-1])
-        time.sleep(.5)
+        time.sleep(1)
         driver.find_element(By.XPATH,"//*[@id=\"case_frm\"]/button[2]").click()
         time.sleep(.5)
         Select(driver.find_element(By.ID, "fasal_name")).select_by_visible_text(f"{iterable_fasal[i-1]}")
-    except NoSuchElementException :
-         time.sleep(5)
+    except :
+         time.sleep(2)
          print("error occued on entry" f"{i}")
+         driver.refresh()
          driver.find_element(By.XPATH,"//*[@id=\"searchGata\"]/div/div[3]/table/tbody/tr[3]/td[4]/a").click()
          time.sleep(1)
+         
+         
          search_number(iterable_gata[i-1])
          print(iterable_id[i-1])
          driver.find_element(By.ID,f"{iterable_id[i-1]}").click()
@@ -222,7 +235,7 @@ def fill_khasra_pravisti(i):
             driver.find_element(By.ID, "sichitArea").clear()
             driver.find_element(By.ID, "sichitArea").send_keys(iterable_area[i-1])
             print(iterable_area[i-1])
-            driver.find_element(By.XPATH,"//*[@id=\"tab-3\"]/form/p/table[3]/tbody/tr/td[1]/input[5]").click()
+            driver.find_element(By.XPATH,"//*[@id=\"submitBtn\"]").click()
             time.sleep(1)
             driver.find_element(By.XPATH,"//*[@id=\"content\"]/center/header/div/div[7]/div").click()
         else:
@@ -230,14 +243,15 @@ def fill_khasra_pravisti(i):
             driver.find_element(By.ID, "asichitArea").clear()
             driver.find_element(By.ID, "asichitArea").send_keys(iterable_area[i-1])
             print(iterable_area[i-1])
-            driver.find_element(By.XPATH,"//*[@id=\"tab-3\"]/form/p/table[3]/tbody/tr/td[1]/input[5]").click()
+            driver.find_element(By.XPATH,"//*[@id=\"submitBtn\"]").click()
             time.sleep(1)
             driver.find_element(By.XPATH,"//*[@id=\"content\"]/center/header/div/div[7]/div").click()
              
     else:
-        driver.find_element(By.XPATH,"//*[@id=\"tab-3\"]/form/p/table[3]/tbody/tr/td[1]/input[5]").click()
+        driver.find_element(By.XPATH,"//*[@id=\"submitBtn\"]").click()
         time.sleep(1)
         driver.find_element(By.XPATH,"//*[@id=\"content\"]/center/header/div/div[7]/div").click()
+        
         
         
     
