@@ -1,11 +1,15 @@
-
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException,NoAlertPresentException,UnexpectedAlertPresentException,NoSuchElementException
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.action_chains import ActionChains
 import time
+import openpyxl
 
 #------------------------------------
 total_gata=range(1,600)
@@ -15,8 +19,8 @@ blank_gata=[]
 
 
 
-driver_path = "./chromedriver"
-driver = webdriver.Chrome(driver_path)
+serv_obj=Service("chromedriver.exe")
+driver=webdriver.Chrome(service=serv_obj)
 
 PASSWORD = "password"
 DISTRICT_VALUE = "136"
