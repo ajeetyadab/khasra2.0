@@ -18,7 +18,8 @@ VILLAGE = ["0113600723036/ हरदासपुर कोठरा/पैगम
 		   "0113600723036/ हरदासपुर कोठरा/हरदासपुर कौठरा/116377",
 		   "0113600723036/ हरदासपुर कोठरा/मडैयान भज्जन/116368",
 		   "0113600723036/ हरदासपुर कोठरा/हरनगला/116374",
-		   "0113600723036/ हरदासपुर कोठरा/पृथीनगर/116373"
+		   "0113600723036/ हरदासपुर कोठरा/पृथीनगर/116373",
+		   "0113600723019/ खेमपुर/रसूलपुर फरीदपुर/116364"
 		   ]
 
 serv_obj=Service("chromedriver.exe")
@@ -51,7 +52,7 @@ def load_second_page():
 	driver.find_element(By.XPATH, "/html/body/div/div/div/form/div[7]/button").click()
 	
 def load_third_page():
-	Select(driver.find_element(By.ID,"gram_name")).select_by_visible_text(VILLAGE[1])
+	Select(driver.find_element(By.ID,"gram_name")).select_by_visible_text(VILLAGE[5])
 	time.sleep(1)
 	driver.find_element(By.XPATH, "//*[@id=\"content1\"]/form/div[2]/button").click()
 	
