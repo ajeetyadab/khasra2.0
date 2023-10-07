@@ -110,7 +110,7 @@ def load_first_page():
     time.sleep(1)
     driver.find_element(By.XPATH,"//*[@id=\"about_us\"]/div/div[2]/a").click()
     time.sleep(2)
-    if ttime.tm_hour >=9:
+    if ttime.tm_hour >=9 and ttime.tm_hour <= 16:
         driver.find_element(By.XPATH,"/html/body/center/main/div/div/ul/li[3]/a/div/div[1]").click() # 8- 5 pm link
         
 		
@@ -200,10 +200,9 @@ def fill_khasra_pravisti(i):
     print(i)
     search_number(str(iterable_gata[i-1]))
     print(iterable_gata[i-1])
-    #mywait.until(expected_conditions.presence_of_element_located(By.ID,f"{iterable_id[i-1]}"))
-    try :
     
-        time.sleep(1)
+    try :
+        mywait.until(expected_conditions.presence_of_element_located((By.ID,f"{iterable_id[i-1]}")))
         driver.find_element(By.ID,f"{iterable_id[i-1]}").click()
         print(iterable_id[i-1])
         time.sleep(1)
@@ -214,12 +213,14 @@ def fill_khasra_pravisti(i):
          time.sleep(2)
          print("error occued on entry" f"{i}")
          driver.refresh()
+         
          driver.find_element(By.XPATH,"//*[@id=\"searchGata\"]/div/div[3]/table/tbody/tr[3]/td[4]/a").click()
          time.sleep(1)
          
          
          search_number(iterable_gata[i-1])
          print(iterable_id[i-1])
+         #mywait.until(expected_conditions.presence_of_element_located(By.ID,f"{iterable_id[i-1]}"))
          driver.find_element(By.ID,f"{iterable_id[i-1]}").click()
          print(iterable_id[i-1])
          time.sleep(.5)
