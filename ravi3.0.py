@@ -179,7 +179,9 @@ def load_fourth_page():
 def fill_form():
     time.sleep(0.5)
     for i in range(start_gata,total_gata):
+    #for i in [127,656,65,49,331,12,200,410,56,539,427,418]:
         fill_khasra_pravisti(i)
+        #aapda(str(i))
         
         
 
@@ -255,7 +257,26 @@ def fill_khasra_pravisti(i):
         
         
         
-    
+def aapda(i):
+	search_number(i)
+	mywait.until(expected_conditions.presence_of_element_located((By.ID,"ksn-0")))
+	driver.find_element(By.ID,"ksn-0").click()
+	driver.find_element(By.XPATH,"//*[@id=\"case_frm\"]/button[3]").click()
+	time.sleep(1)
+	driver.find_element(By.ID,"chkYes").click()
+	Select(driver.find_element(By.ID,"disasterType0")).select_by_visible_text("अन्य")
+	time.sleep(.3)
+	driver.find_element(By.ID,"epc0").click()
+	time.sleep(.5)
+	Select(driver.find_element(By.ID,"disasterRatio0")).select_by_visible_text("51% से 75%")
+	driver.find_element(By.ID,"btnSummit").click()
+	time.sleep(2)
+	driver.find_element(By.XPATH,"//*[@id=\"content\"]/center/header/div/div[7]/div/a").click()
+	time.sleep(2)
+	
+	
+	
+	
     
     
     
@@ -270,15 +291,6 @@ def fill_khasra_pravisti(i):
     
 
 
-def khatauni_detail_extracion(i):
-    driver.find_element(By.XPATH,"//*[@id=\"case_frm\"]/button[2]").click()
-    time.sleep(1)
-    
-    
-    driver.find_element(By.XPATH,"//*[@id=\"content\"]/center/header/div/div[7]/div").click()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-    time.sleep(1)
-    
-    
 
     
 
