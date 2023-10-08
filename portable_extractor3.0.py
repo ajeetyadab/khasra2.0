@@ -177,7 +177,7 @@ def fill_khasra_pravisti(i):
             if driver.find_element(By.XPATH,"//*[@id=\"searchGata\"]/div/div[1]/div/div[2]/ul/li").text != "डाटा उपलब्ध नहीं है":
                 print(driver.find_element(By.XPATH,"//*[@id=\"searchGata\"]/div/div[1]/div/div[2]/ul/li").get_attribute("id"))
                 gata_detail = driver.find_element(By.XPATH,"//*[@id=\"searchGata\"]/div/div[1]/div/div[2]/ul/li").text.split(":")
-                sheet1.append([f'{gata_detail[0]}',f'{gata_detail[1]}',"ksn-0"])
+                sheet1.append([f'{i}',f'{gata_detail[0]}',f'{gata_detail[1]}',"ksn-0"])
                 workbook1.save(file1)
                 driver.find_element(By.XPATH,number_x_path_map["clear"]).click()
                 
@@ -186,9 +186,9 @@ def fill_khasra_pravisti(i):
             
             
         elif len(gata_element_list) >=1:
-            for i in range(0,len(gata_element_list)-1):
+            for j in range(0,len(gata_element_list)-1):
                 gata_detail = gata_element_list[i].text.split(":")
-                sheet1.append([f'{i}',f'{gata_detail[0]}',f'{gata_detail[1]}',f'ksn-{i}'])
+                sheet1.append([f'{i}',f'{gata_detail[0]}',f'{gata_detail[1]}',f'ksn-{j}'])
                 workbook1.save(file1)
             driver.find_element(By.XPATH,number_x_path_map["clear"]).click()
     except:
@@ -216,7 +216,7 @@ def fill_khasra_pravisti(i):
             
         elif len(gata_element_list) >=1:
             for j in range(0,len(gata_element_list)-1):
-                gata_detail = gata_element_list[i].text.split(":")
+                gata_detail = gata_element_list[j].text.split(":")
                 sheet1.append([f'{i}',f'{gata_detail[0]}',f'{gata_detail[1]}',f'ksn-{j}'])
                 workbook1.save(file1)
             driver.find_element(By.XPATH,number_x_path_map["clear"]).click()
