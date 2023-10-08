@@ -52,7 +52,7 @@ def load_second_page():
 	driver.find_element(By.XPATH, "/html/body/div/div/div/form/div[7]/button").click()
 	
 def load_third_page():
-	Select(driver.find_element(By.ID,"gram_name")).select_by_visible_text(VILLAGE[5])
+	Select(driver.find_element(By.ID,"gram_name")).select_by_visible_text(VILLAGE[1])
 	time.sleep(1)
 	driver.find_element(By.XPATH, "//*[@id=\"content1\"]/form/div[2]/button").click()
 	

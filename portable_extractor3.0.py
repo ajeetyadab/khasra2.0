@@ -164,18 +164,64 @@ def search_number(number):
     
 
 def fill_khasra_pravisti(i):
-    search_number(i)
-    time.sleep(1.5)
-    gata_element_list=driver.find_elements(By.XPATH,"//*[@id=\"searchGata\"]/div/div[1]/div/div[2]/ul/li")
-    
-    if len(gata_element_list) ==0:
-		pass
-	
-	elif len(gata_element_list) ==1:
-		pass
-	
-	elif len(gata_element_list) =>1:
-		pass 
+    try:
+        search_number(i)
+        time.sleep(1)
+        gata_element_list=driver.find_elements(By.XPATH,"//*[@id=\"searchGata\"]/div/div[1]/div/div[2]/ul/li")
+        
+        if len(gata_element_list) == 0:
+            driver.find_element(By.XPATH,number_x_path_map["clear"]).click()
+        
+        elif len(gata_element_list) ==1:
+            
+            if driver.find_element(By.XPATH,"//*[@id=\"searchGata\"]/div/div[1]/div/div[2]/ul/li").text != "डाटा उपलब्ध नहीं है":
+                print(driver.find_element(By.XPATH,"//*[@id=\"searchGata\"]/div/div[1]/div/div[2]/ul/li").get_attribute("id"))
+                gata_detail = driver.find_element(By.XPATH,"//*[@id=\"searchGata\"]/div/div[1]/div/div[2]/ul/li").text.split(":")
+                sheet1.append([f'{gata_detail[0]}',f'{gata_detail[1]}',"ksn-0"])
+                workbook1.save(file1)
+                driver.find_element(By.XPATH,number_x_path_map["clear"]).click()
+                
+            else:
+                driver.find_element(By.XPATH,number_x_path_map["clear"]).click()
+            
+            
+        elif len(gata_element_list) >=1:
+            for i in range(0,len(gata_element_list)-1):
+                gata_detail = gata_element_list[i].text.split(":")
+                sheet1.append([f'{i}',f'{gata_detail[0]}',f'{gata_detail[1]}',f'ksn-{i}'])
+                workbook1.save(file1)
+            driver.find_element(By.XPATH,number_x_path_map["clear"]).click()
+    except:
+        driver.refresh()
+        time.sleep(2)
+        search_number(i)
+        time.sleep(1)
+        gata_element_list=driver.find_elements(By.XPATH,"//*[@id=\"searchGata\"]/div/div[1]/div/div[2]/ul/li")
+        
+        if len(gata_element_list) == 0:
+            driver.find_element(By.XPATH,number_x_path_map["clear"]).click()
+        
+        elif len(gata_element_list) ==1:
+            
+            if driver.find_element(By.XPATH,"//*[@id=\"searchGata\"]/div/div[1]/div/div[2]/ul/li").text != "डाटा उपलब्ध नहीं है":
+                print(driver.find_element(By.XPATH,"//*[@id=\"searchGata\"]/div/div[1]/div/div[2]/ul/li").get_attribute("id"))
+                gata_detail = driver.find_element(By.XPATH,"//*[@id=\"searchGata\"]/div/div[1]/div/div[2]/ul/li").text.split(":")
+                sheet1.append([f'{i}',f'{gata_detail[0]}',f'{gata_detail[1]}',"ksn-0"])
+                workbook1.save(file1)
+                driver.find_element(By.XPATH,number_x_path_map["clear"]).click()
+                
+            else:
+                driver.find_element(By.XPATH,number_x_path_map["clear"]).click()
+            
+            
+        elif len(gata_element_list) >=1:
+            for j in range(0,len(gata_element_list)-1):
+                gata_detail = gata_element_list[i].text.split(":")
+                sheet1.append([f'{i}',f'{gata_detail[0]}',f'{gata_detail[1]}',f'ksn-{j}'])
+                workbook1.save(file1)
+            driver.find_element(By.XPATH,number_x_path_map["clear"]).click()
+        
+             
 
     
 
