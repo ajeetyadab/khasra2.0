@@ -14,11 +14,11 @@ import openpyxl
 
 
 
-file1="C:/Users/acer/Desktop/hrd.xlsx"
+file1="C:/Users/acer/Desktop/dhanauri.xlsx"
 file2="C:/Users/acer/Desktop/data.xlsx"
 workbook1=openpyxl.load_workbook(file1)
 workbook2=openpyxl.load_workbook(file2)
-sheet1=workbook1["analysis_copy"]
+sheet1=workbook1["fasal"]
 sheet2=workbook2["credentials"]
 
 
