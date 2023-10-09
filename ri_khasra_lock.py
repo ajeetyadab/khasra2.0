@@ -34,7 +34,7 @@ def load_first_page():
     time.sleep(1)
     driver.find_element(By.XPATH,"//*[@id=\"about_us\"]/div/div[2]/a").click()
     time.sleep(1)
-    driver.find_element(By.XPATH, "/html/body/center/main/div/div/ul/li[2]/a/div/div[1]").click() # active before 4pm li[2]then li[4]
+    driver.find_element(By.XPATH, "/html/body/center/main/div/div/ul/li[4]/a/div/div[1]").click() # active before 4pm li[2]then li[4]
     time.sleep(1)
 
 def load_second_page():
@@ -52,13 +52,13 @@ def load_second_page():
 	driver.find_element(By.XPATH, "/html/body/div/div/div/form/div[7]/button").click()
 	
 def load_third_page():
-	Select(driver.find_element(By.ID,"gram_name")).select_by_visible_text(VILLAGE[5])
+	Select(driver.find_element(By.ID,"gram_name")).select_by_visible_text(VILLAGE[1]) #village name
 	time.sleep(1)
 	driver.find_element(By.XPATH, "//*[@id=\"content1\"]/form/div[2]/button").click()
 	
 def load_fourth_page():
 	driver.find_element(By.ID, "link2").click()
-	time.sleep(30)
+	time.sleep(20)
 		
 	while len(driver.find_elements(By.XPATH,"//input[@name=\"chk\"]")) !=0:
 		check_box = driver.find_elements(By.XPATH,"//input[@name=\"chk\"]")
@@ -70,7 +70,7 @@ def load_fourth_page():
 			print("element clicked")
 	
 		driver.find_element(By.XPATH, "//*[@id=\"printarea\"]/div[4]/form/button").click()
-		time.sleep(40)
+		time.sleep(20)
 	
 
 
