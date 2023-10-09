@@ -22,6 +22,11 @@ VILLAGE = ["0113600723036/ हरदासपुर कोठरा/पैगम
 		   "0113600723019/ खेमपुर/रसूलपुर फरीदपुर/116364"
 		   ]
 
+FASAL = {"khareef":"",
+         "rabi": "",
+         "jayad": ""
+        }
+
 serv_obj=Service("chromedriver.exe")
 driver=webdriver.Chrome(service=serv_obj)
 actions=ActionChains(driver)
@@ -52,13 +57,13 @@ def load_second_page():
 	driver.find_element(By.XPATH, "/html/body/div/div/div/form/div[7]/button").click()
 	
 def load_third_page():
-	Select(driver.find_element(By.ID,"gram_name")).select_by_visible_text(VILLAGE[1])
+	Select(driver.find_element(By.ID,"gram_name")).select_by_visible_text(VILLAGE[1]) #enter name of village here
 	time.sleep(1)
 	driver.find_element(By.XPATH, "//*[@id=\"content1\"]/form/div[2]/button").click()
 	
 def load_fourth_page():
 	driver.find_element(By.ID, "link2").click()
-	time.sleep(30)
+	time.sleep(20)
 		
 	while len(driver.find_elements(By.XPATH,"//input[@name=\"chk\"]")) !=0:
 		check_box = driver.find_elements(By.XPATH,"//input[@name=\"chk\"]")
@@ -70,7 +75,7 @@ def load_fourth_page():
 			print("element clicked")
 	
 		driver.find_element(By.XPATH, "//*[@id=\"printarea\"]/div[4]/form/button").click()
-		time.sleep(40)
+		time.sleep(20)
 	
 
 
