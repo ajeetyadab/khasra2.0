@@ -107,6 +107,9 @@ def load_second_page():
     #captcha_value = driver.find_element(By.ID, "CaptchaDiv").text
     #driver.find_element(By.ID, "CaptchaInput").send_keys(captcha_value)
     driver.find_element(By.ID, "password").send_keys(pass_word)
+    x = driver.find_element(By.ID,"captcha").text
+    print(x)
+    print(len(x))
     time.sleep(15)
     driver.find_element(By.CLASS_NAME, "login100-form-btn").click()
 
@@ -121,7 +124,8 @@ def load_third_page():
     
     time.sleep(3)
     #Select(driver.find_element(By.ID,"fasal")).select_by_visible_text("खरीफ की फसल (10 अगस्त से 30 सितम्बर)") # FOR KHAREEF
-    Select(driver.find_element(By.ID,"fasal")).select_by_visible_text("रबी की फसल (1 जनवरी से 28 फरवरी)") # FOR RABI
+    #Select(driver.find_element(By.ID,"fasal")).select_by_visible_text("रबी की फसल (1 जनवरी से 28 फरवरी)") # FOR RABI
+    Select(driver.find_element(By.ID,"fasal")).select_by_visible_text("जायद की फसल (15 अप्रैल से 31 मई)")# for jayad
     
     time.sleep(1)
     alert_window_0 = driver.switch_to.alert
@@ -159,6 +163,8 @@ def click_digits(digits):
 def search_number(number):
     click_digits(str(number))
     driver.find_element(By.XPATH, "//*[@id=\"sgw\"]/button/i").click()
+    #mywait.until(expected_conditions.presence_of_element_located((By.XPATH,"//*[@id=\"searchGata\"]/div/div[1]/div/div[2]/ul/li")))
+    time.sleep(1.5)
     
     
     
@@ -166,7 +172,7 @@ def search_number(number):
 def fill_khasra_pravisti(i):
     try:
         search_number(i)
-        time.sleep(1)
+        #time.sleep(1)
         gata_element_list=driver.find_elements(By.XPATH,"//*[@id=\"searchGata\"]/div/div[1]/div/div[2]/ul/li")
         
         if len(gata_element_list) == 0:
@@ -193,7 +199,9 @@ def fill_khasra_pravisti(i):
             driver.find_element(By.XPATH,number_x_path_map["clear"]).click()
     except:
         driver.refresh()
-        time.sleep(2)
+        time.sleep(1)
+        driver.refresh()
+        time.sleep(1)
         search_number(i)
         time.sleep(1)
         gata_element_list=driver.find_elements(By.XPATH,"//*[@id=\"searchGata\"]/div/div[1]/div/div[2]/ul/li")
