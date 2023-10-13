@@ -1,11 +1,15 @@
-
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException,NoAlertPresentException,UnexpectedAlertPresentException,NoSuchElementException
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.action_chains import ActionChains
 import time
+import openpyxl
 
 #------------------------------------
 total_gata=range(1,600)
@@ -15,8 +19,8 @@ blank_gata=[]
 
 
 
-driver_path = "./chromedriver"
-driver = webdriver.Chrome(driver_path)
+serv_obj=Service("chromedriver.exe")
+driver=webdriver.Chrome(service=serv_obj)
 
 PASSWORD = "password"
 DISTRICT_VALUE = "136"
@@ -53,9 +57,18 @@ XPATH_MAPPING = {
 
 def load_first_page():
     driver.get("http://164.100.59.148/")
+    time.sleep(1)
+    driver.find_element(By.XPATH,"//*[@id=\"about_us\"]/div/div[2]/a").click()
     time.sleep(2)
-    driver.find_element(By.XPATH, "/html/body/center/main/div/div/ul/li[4]/a/div/div[1]").click()
-    time.sleep(.25)
+    if ttime.tm_hour >=9 and ttime.tm_hour <= 16:
+        driver.find_element(By.XPATH,"/html/body/center/main/div/div/ul/li[3]/a/div/div[1]").click() # 8- 5 pm link
+        
+		
+    else:
+        driver.find_element(By.XPATH,"/html/body/center/main/div/div/ul/li[5]/a/div/div[1]").click() # after 8 pm link
+        
+    
+    time.sleep(1)
 
 
 def load_second_page():
