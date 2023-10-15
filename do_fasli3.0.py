@@ -203,6 +203,7 @@ def fill_form():
 
 def click_digits(digits):
     for digit in digits:
+        print(digit)
         driver.find_element(By.XPATH, number_x_path_map[digit]).click()
         
         
@@ -275,7 +276,7 @@ def fill_khasra_pravisti(i):
 def do_fasli(i):
     print(i)
     search_number(str(iterable_gata[i-1]))
-    print(iterable_gata[i-1])
+    print("gata",iterable_gata[i-1])
     
     try:
         mywait.until(expected_conditions.presence_of_element_located((By.ID,f"{iterable_id[i-1]}")))
@@ -284,22 +285,25 @@ def do_fasli(i):
         time.sleep(1)
         driver.find_element(By.XPATH,"//*[@id=\"case_frm\"]/button[7]").click() 
         if do_fasli_s[i-1]!=None:
-            driver.find_element(By.XPATH,"//*[@id=\"doFasliSichitArea\"]").clear()
-            driver.find_element(By.XPATH,"//*[@id=\"doFasliSichitArea\"]").send_keys(do_fasli_s[i-1])
+            driver.find_element(By.ID,"doFasliSichitArea").clear()
+            driver.find_element(By.ID,"doFasliSichitArea").send_keys(do_fasli_s[i-1])
         
         elif do_fasli_a[i-1]!=None :
             driver.find_element(By.XPATH,"//*[@id=\"doFasliAsichitArea\"]").clear()
             driver.find_element(By.XPATH,"//*[@id=\"doFasliAsichitArea\"]").send_keys(do_fasli_a[i-1])
          
         elif uncul_area[i-1]!=None:
-            Select(driver.find_element(By.XPATH,"//*[@id=\"akrishit_type\"]")).select_by_visible_text(uncul_area[i-1])
-            driver.find_element(By.XPATH,"//*[@id=\"akrishit_area\"]").clear()
-            driver.find_element(By.XPATH,"//*[@id=\"akrishit_area\"]").send_keys(uncul_area[i-1])
+            driver.find_element(By.ID,"akrishit_area").clear()
+            driver.find_element(By.ID,"akrishit_area").send_keys(uncul_area[i-1])
+            Select(driver.find_element(By.ID,"akrishit_type")).select_by_visible_text(akrishak_vivran[i-1])
+            time.sleep(5)
+
     
         #driver.find_element(By.XPATH,"//*[@id=\"tab-4\"]/form/p/table[2]/tbody/tr/td[1]/input[1]").click()
-        time.sleep(3)
-        driver.find_element(By.XPATH,"//*[@id=\"content\"]/center/header/div/div[7]/div").click()
+        time.sleep(1)
+        driver.find_element(By.CLASS_NAME,"action-link").click()
     except:
+        print("error occured")
         pass
     
     
