@@ -283,25 +283,38 @@ def do_fasli(i):
         driver.find_element(By.ID,f"{iterable_id[i-1]}").click()
         print(iterable_id[i-1])
         time.sleep(1)
-        driver.find_element(By.XPATH,"//*[@id=\"case_frm\"]/button[7]").click() 
+        
         if do_fasli_s[i-1]!=None:
+            driver.find_element(By.XPATH,"//*[@id=\"case_frm\"]/button[7]").click()
+            time.sleep(1)
             driver.find_element(By.ID,"doFasliSichitArea").clear()
             driver.find_element(By.ID,"doFasliSichitArea").send_keys(do_fasli_s[i-1])
-        
+            driver.find_element(By.ID,"btnSummit").click()
+            time.sleep(.5)
+            driver.find_element(By.XPATH,"//*[@id=\"content\"]/center/header/div/div[7]/div").click()
+       
         elif do_fasli_a[i-1]!=None :
+            driver.find_element(By.XPATH,"//*[@id=\"case_frm\"]/button[7]").click()
+            time.sleep(1)
             driver.find_element(By.XPATH,"//*[@id=\"doFasliAsichitArea\"]").clear()
             driver.find_element(By.XPATH,"//*[@id=\"doFasliAsichitArea\"]").send_keys(do_fasli_a[i-1])
+            driver.find_element(By.ID,"btnSummit").click()
+            time.sleep(.5)
+            driver.find_element(By.XPATH,"//*[@id=\"content\"]/center/header/div/div[7]/div").click()
+
          
         elif uncul_area[i-1]!=None:
-            driver.find_element(By.ID,"akrishit_area").clear()
-            driver.find_element(By.ID,"akrishit_area").send_keys(uncul_area[i-1])
-            Select(driver.find_element(By.ID,"akrishit_type")).select_by_visible_text(akrishak_vivran[i-1])
-            time.sleep(5)
+            driver.find_element(By.XPATH,"//*[@id=\"case_frm\"]/button[7]").click()
+            time.sleep(2)
+            #driver.find_element(By.ID,"akrishit_area").clear()
+            #driver.find_element(By.ID,"akrishit_area").send_keys(uncul_area[i-1])
+            #Select(driver.find_element(By.ID,"akrishit_type")).select_by_visible_text(akrishak_vivran[i-1])
+            #time.sleep(.5)
+            #driver.find_element(By.ID,"btnSummit").click()
+            driver.find_element(By.XPATH,"//*[@id=\"content\"]/center/header/div/div[7]/div").click()
 
     
-        #driver.find_element(By.XPATH,"//*[@id=\"tab-4\"]/form/p/table[2]/tbody/tr/td[1]/input[1]").click()
-        time.sleep(1)
-        driver.find_element(By.CLASS_NAME,"action-link").click()
+
     except:
         print("error occured")
         pass
