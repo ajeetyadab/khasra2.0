@@ -295,11 +295,11 @@ def do_fasli(i):
        
         elif do_fasli_a[i-1]!=None :
             driver.find_element(By.XPATH,"//*[@id=\"case_frm\"]/button[7]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH,"//*[@id=\"doFasliAsichitArea\"]").clear()
-            driver.find_element(By.XPATH,"//*[@id=\"doFasliAsichitArea\"]").send_keys(do_fasli_a[i-1])
-            driver.find_element(By.ID,"btnSummit").click()
-            time.sleep(.5)
+            #time.sleep(1)
+            #driver.find_element(By.XPATH,"//*[@id=\"doFasliAsichitArea\"]").clear()
+            #driver.find_element(By.XPATH,"//*[@id=\"doFasliAsichitArea\"]").send_keys(do_fasli_a[i-1])
+            #driver.find_element(By.ID,"btnSummit").click()
+            time.sleep(2)
             driver.find_element(By.XPATH,"//*[@id=\"content\"]/center/header/div/div[7]/div").click()
 
          
