@@ -27,7 +27,7 @@ gram_name=sheet2.cell(2,3).value
 total_gata=sheet2.cell(2,4).value
 start_gata=sheet2.cell(2,5).value
 
-
+ttime = time.localtime()
 
 
 options = Options()
@@ -72,15 +72,16 @@ def load_first_page():
     driver.get("http://164.100.59.148/")
     time.sleep(1)
     driver.find_element(By.XPATH,"//*[@id=\"about_us\"]/div/div[2]/a").click()
-    time.sleep(1)
-    driver.find_element(By.XPATH,"/html/body/center/main/div/div/ul/li[3]/a/div/div[1]").click() # 9- 5 pm link
+    time.sleep(2)
+    if ttime.tm_hour >=9 and ttime.tm_hour <= 16:
+        driver.find_element(By.XPATH,"/html/body/center/main/div/div/ul/li[3]/a/div/div[1]").click() # 8- 5 pm link
+        
+		
+    else:
+        driver.find_element(By.XPATH,"/html/body/center/main/div/div/ul/li[5]/a/div/div[1]").click() # after 8 pm link
+        
     
     time.sleep(1)
-    #driver.find_element(By.XPATH,"/html/body/center/main/div/div/ul/li[5]/a/div/div[1]").click() # after 5 pm link
-    time.sleep(1)
-
-
-
 
 
 
@@ -111,8 +112,10 @@ def load_third_page():
     time.sleep(1)
     Select(driver.find_element(By.ID,"fasalYear")).select_by_visible_text("1430 (1 जुलाई 2022 से 30 जून 2023)")
     #Select(driver.find_element(By.ID,"fasalYear")).select_by_visible_text("1428 (1 जुलाई 2020 से 30 जून 2021)")
+    Select(driver.find_element(By.ID,"fasalYear")).select_by_visible_text("1430 (1 जुलाई 2022 से 30 जून 2023)")
+    
     time.sleep(3)
-    Select(driver.find_element(By.ID,"fasal")).select_by_visible_text("खरीफ की फसल (10 अगस्त से 30 सितम्बर)")
+    Select(driver.find_element(By.ID,"fasal")).select_by_visible_text("रबी की फसल (1 जनवरी से 28 फरवरी)")
     time.sleep(1)
     alert_window_0 = driver.switch_to.alert
     print(alert_window_0.text)

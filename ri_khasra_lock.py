@@ -108,36 +108,43 @@ def load_second_page():
 	driver.find_element(By.XPATH, "/html/body/div/div/div/form/div[7]/button").click()
 	time.sleep(2)
 	
-def load_third_page():
-	Select(driver.find_element(By.ID,"gram_name")).select_by_visible_text(VILLAGE[7]) #village name
+def load_third_page(vilage_name):
+	Select(driver.find_element(By.ID,"gram_name")).select_by_visible_text(VILLAGE[vilage_name]) #village name
 
 	time.sleep(1)
 	driver.find_element(By.XPATH, "//*[@id=\"content1\"]/form/div[2]/button").click()
 	
-def load_fourth_page():
-	driver.find_element(By.ID, FASAL["khareef"]).click() # name of fasal to be locked
-	time.sleep(12)
-		
-	while len(driver.find_elements(By.XPATH,"//input[@name=\"chk\"]")) !=0:
-		check_box = driver.find_elements(By.XPATH,"//input[@name=\"chk\"]")
-		print(len(check_box))
-		for boxes in check_box:
-			driver.execute_script("arguments[0].scrollIntoView();", boxes)
-			time.sleep(.5)
-			actions.move_to_element(boxes).click().perform()
-			print("element clicked")
-	
-		driver.find_element(By.XPATH, "//*[@id=\"printarea\"]/div[4]/form/button").click()
-		time.sleep(12)
+def load_fourth_page(village_name):
+    driver.find_element(By.ID, FASAL["khareef"]).click() # name of fasal to be locked
+    time.sleep(12)
+    try:
+         driver.find_elements(By.XPATH,"//input[@name=\"chk\"]")
+         while len(driver.find_elements(By.XPATH,"//input[@name=\"chk\"]")) !=0:
+            check_box = driver.find_elements(By.XPATH,"//input[@name=\"chk\"]")
+            print(len(check_box))
+            for boxes in check_box:
+                driver.execute_script("arguments[0].scrollIntoView();", boxes)
+                time.sleep(.5)
+                actions.move_to_element(boxes).click().perform()
+                print("element clicked")
+        
+            driver.find_element(By.XPATH, "//*[@id=\"printarea\"]/div[4]/form/button").click()
+            time.sleep(12)
+         driver.find_element(By.ID,"ri_remark").send_keys("approved")
+         time.sleep(10)
+    except NoSuchElementException:
+        pass
+    load_third_page(village_name)
+    load_fourth_page()
 	
 
 
 	
 
-	
-load_first_page()
-load_second_page()
-load_third_page()
-load_fourth_page()
+for i in range(40,50):
+    load_first_page()
+    load_second_page()
+    load_third_page(i)
+    load_fourth_page(i)
 
 
