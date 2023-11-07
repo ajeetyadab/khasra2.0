@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
-from selenium.webdriver.support import expected_conditions
+#from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException,NoAlertPresentException,UnexpectedAlertPresentException,NoSuchElementException
@@ -14,7 +14,7 @@ import openpyxl
 
 PASSWORD = "Anoop@123"
 
-VILLAGE={
+VILLAGE = {
     
            1:'0113600723036/ हरदासपुर कोठरा/पैगम्वर पुर/116370',
 		   2:'0113600723036/ हरदासपुर कोठरा/हरदासपुर कौठरा/116377',
@@ -141,7 +141,7 @@ def load_fourth_page(village_name):
 
 	
 
-for i in range(40,50):
+for i in range(11,50):
     load_first_page()
     load_second_page()
     load_third_page(i)

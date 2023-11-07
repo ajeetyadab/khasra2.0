@@ -123,9 +123,9 @@ def load_third_page():
     
     
     time.sleep(3)
-    #Select(driver.find_element(By.ID,"fasal")).select_by_visible_text("खरीफ की फसल (10 अगस्त से 30 सितम्बर)") # FOR KHAREEF
+    Select(driver.find_element(By.ID,"fasal")).select_by_visible_text("खरीफ की फसल (10 अगस्त से 30 सितम्बर)") # FOR KHAREEF
     #Select(driver.find_element(By.ID,"fasal")).select_by_visible_text("रबी की फसल (1 जनवरी से 28 फरवरी)") # FOR RABI
-    Select(driver.find_element(By.ID,"fasal")).select_by_visible_text("जायद की फसल (15 अप्रैल से 31 मई)")# for jayad
+    #Select(driver.find_element(By.ID,"fasal")).select_by_visible_text("जायद की फसल (15 अप्रैल से 31 मई)")# for jayad
     
     time.sleep(1)
     alert_window_0 = driver.switch_to.alert

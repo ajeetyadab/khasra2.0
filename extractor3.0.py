@@ -110,12 +110,11 @@ def load_third_page():
     time.sleep(3)
     Select(driver.find_element(By.ID,"gram_name")).select_by_visible_text(gram_name)
     time.sleep(1)
-    Select(driver.find_element(By.ID,"fasalYear")).select_by_visible_text("1430 (1 जुलाई 2022 से 30 जून 2023)")
+    #Select(driver.find_element(By.ID,"fasalYear")).select_by_visible_text("1430 (1 जुलाई 2022 से 30 जून 2023)")
     #Select(driver.find_element(By.ID,"fasalYear")).select_by_visible_text("1428 (1 जुलाई 2020 से 30 जून 2021)")
-    Select(driver.find_element(By.ID,"fasalYear")).select_by_visible_text("1430 (1 जुलाई 2022 से 30 जून 2023)")
-    
+    Select(driver.find_element(By.ID,"fasalYear")).select_by_visible_text("1430 (1 जुलाई 2022 से 30 जून 2023)")    
     time.sleep(3)
-    Select(driver.find_element(By.ID,"fasal")).select_by_visible_text("रबी की फसल (1 जनवरी से 28 फरवरी)")
+    Select(driver.find_element(By.ID,"fasal")).select_by_visible_text("खरीफ की फसल (10 अगस्त से 30 सितम्बर)")
     time.sleep(1)
     alert_window_0 = driver.switch_to.alert
     print(alert_window_0.text)
@@ -198,8 +197,11 @@ def khatauni_detail_extracion(i):
     gata_uid_list=(driver.find_element(By.XPATH,"//*[@id=\"tabs-container\"]/div[1]/label[2]").text).split(" : ")
     gata_area_list=(driver.find_element(By.XPATH,"//*[@id=\"tabs-container\"]/div[1]/label[3]").text).split(" : ")
     gata_area=gata_area_list[1].strip()
+    khareef = driver.find_element(By.XPATH,"//*[@id=\"tab-3\"]/table/tbody/tr[2]/td[1]").text
+    irigation_tech = driver.find_element(By.XPATH,"//*[@id=\"tab-3\"]/table/tbody/tr[2]/td[4]").text
+    print(khareef)
     
-    sheet1.append([f'{i}',f'{gata_num_list[1].strip()}',float(f'{gata_area}'),f'{gata_uid_list[1].strip()}',f'{khata_name_list[1].strip()}'])
+    sheet1.append([f'{i}',f'{gata_num_list[1].strip()}',float(f'{gata_area}'),f'{gata_uid_list[1].strip()}',f'{khata_name_list[1].strip()}',f'{khareef}',f'{irigation_tech}'])
     #print(sheet1.cell(i,1).value,sheet1.cell(i,2).value,type(sheet1.cell(i,3).value))
     workbook1.save(file1)
     
