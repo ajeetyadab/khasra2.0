@@ -80,21 +80,24 @@ def load_third_page(vilage_name):
 def load_fourth_page():
     driver.find_element(By.ID, FASAL["khareef"]).click()  # name of fasal to be locked
     time.sleep(5)
+    j=0
     try:
         while len(driver.find_elements(By.XPATH, "//input[@name=\"chk\"]")) != 0:
             check_box = driver.find_elements(By.XPATH, "//input[@name=\"chk\"]")
             print(len(check_box))
-            for no in range(0,100):
-                driver.execute_script("arguments[0].scrollIntoView();", check_box[no])
+            for boxes in check_box:
+                driver.execute_script("arguments[0].scrollIntoView();", boxes)
                 
-                if no < 15:
-                    #time.sleep()
-                    actions.move_to_element(check_box[no]).click().perform()
+                if j <= 9:
+                    time.sleep(.4)
+                    actions.move_to_element(boxes).click().perform()
                     print("element clicked")
+                    j=j+1
                 else:
-                    print("skipped")
-            time.sleep(2)
+                    actions.move_to_element(boxes).perform()                
+
             driver.find_element(By.XPATH, "//*[@id=\"printarea\"]/div[4]/form/button").click()
+            j=0
             time.sleep(5)
 
         driver.execute_script("arguments[0].scrollIntoView();", driver.find_element(By.ID, "ri_remark"))
@@ -112,6 +115,6 @@ def load_fourth_page():
 load_first_page()
 load_second_page()
 
-for i in range(19, 20):
+for i in range(9, 40):
     load_third_page(i)
     load_fourth_page()

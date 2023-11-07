@@ -117,6 +117,7 @@ def load_third_page(vilage_name):
 def load_fourth_page(village_name):
     driver.find_element(By.ID, FASAL["khareef"]).click() # name of fasal to be locked
     time.sleep(12)
+    j = 0
     try:
          driver.find_elements(By.XPATH,"//input[@name=\"chk\"]")
          while len(driver.find_elements(By.XPATH,"//input[@name=\"chk\"]")) !=0:
@@ -127,6 +128,9 @@ def load_fourth_page(village_name):
                 time.sleep(.5)
                 actions.move_to_element(boxes).click().perform()
                 print("element clicked")
+                j = j+1
+                if j >= 20:
+                    break
         
             driver.find_element(By.XPATH, "//*[@id=\"printarea\"]/div[4]/form/button").click()
             time.sleep(12)
@@ -136,15 +140,47 @@ def load_fourth_page(village_name):
         pass
     load_third_page(village_name)
     load_fourth_page()
+
+
+def load_fourth_page_min(village_name):
+    driver.find_element(By.ID, FASAL["khareef"]).click() # name of fasal to be locked
+    time.sleep(12)
+    j =  0
+    try:
+         driver.find_elements(By.XPATH,"//input[@name=\"chk\"]")
+         while len(driver.find_elements(By.XPATH,"//input[@name=\"chk\"]")) !=0:
+            check_box = driver.find_elements(By.XPATH,"//input[@name=\"chk\"]")
+            print(len(check_box))
+            for boxes in check_box:
+                driver.execute_script("arguments[0].scrollIntoView();", boxes)
+                j = j+1
+                if j <= 50:
+                    time.sleep(.4)
+                    actions.move_to_element(boxes).click().perform()
+                    print("element clicked")
+                    
+                else:
+                    actions.move_to_element(boxes).perform()
+                    
+            driver.find_element(By.XPATH, "//*[@id=\"printarea\"]/div[4]/form/button").click()
+            j=0
+            time.sleep(6)
+         driver.find_element(By.ID,"ri_remark").send_keys("approved")
+         time.sleep(10)
+    except NoSuchElementException:
+        pass
+    load_third_page(village_name)
+    load_fourth_page()
 	
 
 
+
 	
 
-for i in range(11,50):
+for i in range(13,50):
     load_first_page()
     load_second_page()
     load_third_page(i)
-    load_fourth_page(i)
+    load_fourth_page_min(i)
 
 
